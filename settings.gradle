@@ -1,0 +1,2 @@
+include ':app', ':crypto-core-tools'
+rootProject.name='CRYPTO-CORE-AND'
