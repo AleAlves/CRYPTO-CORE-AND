@@ -9,8 +9,14 @@ import br.com.aleson.crypto.tools.CryptoTools
 
 class MainActivity : AppCompatActivity() {
 
+    private val pulickKey = "-----BEGIN PUBLIC KEY-----\n" +
+            "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqRq032vsyC1w+BirZn62o50P1\n" +
+            "5xWZLFXr22Cj7jDDOI1UrWOSCKAQ0j83pyB+sE7CDj7335urWL/qPc0nOoikq39G\n" +
+            "lL2OGqavvm86UmyyqZgmp6lteS+Pk5ERD/n+EosrCN8dubjzQCN0YPf7OGE1G4qj\n" +
+            "lrNsX5rjOpJAo5DtPQIDAQAB\n" +
+            "-----END PUBLIC KEY-----"
 
-    private val crypto = CryptoTools.Builder().rsaPublicKey("").build()
+    private val crypto = CryptoTools.Builder().rsaPublicKey(pulickKey).build()
 
     private lateinit var buttonEncrypt: Button
     private lateinit var buttonDeccrypt: Button
@@ -33,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         buttonDeccrypt.setOnClickListener {
             decrypt()
         }
+
+        rsa()
     }
 
     fun encrypt() {
@@ -47,5 +55,10 @@ class MainActivity : AppCompatActivity() {
             return
         }
         plainText.setText(crypto.aes.decrypt(cipherText.text.toString()))
+    }
+
+    fun rsa() {
+        val encrypted = crypto.rsa.encrypt("Cryptography")
+        Toast.makeText(this, encrypted, Toast.LENGTH_SHORT).show()
     }
 }
